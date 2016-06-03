@@ -49,4 +49,16 @@ public class Food implements  CountVariable{
     public String toString (){
         return String.format("%s %f ", name, calories);
     }
+
+    @Override
+    public String getName() {
+        // TODO Auto-generated method stub
+        return this.name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

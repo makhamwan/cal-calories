@@ -2,18 +2,22 @@ package th.bku.apichaya.cal_calories.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
+import th.bku.apichaya.cal_calories.model.CaloriesCalculator;
 import th.bku.apichaya.cal_calories.model.Exercise;
 import th.bku.apichaya.cal_calories.model.Food;
 
 /**
  * Created by makham on 17/4/2559.
  */
-public class Storage {
+public class Storage extends Observable {
     private static Storage instance;
-
-    List foods = new ArrayList<Food>();
-    List exercises = new ArrayList<Exercise>();
+    private List foods = new ArrayList<Food>();
+    private List exercises = new ArrayList<Exercise>();
+    private List eatenFoods = new ArrayList<Food>();
+    private List doneExercises = new ArrayList<Exercise>();
 
     private Storage(){
         foodProvider();
@@ -43,8 +47,19 @@ public class Storage {
 
     public List<Food> getFoodList(){ return foods; }
 
+    public List<Food> getEatenFoodList(){ return eatenFoods; }
+
+    public void addEatenFoods(Food food){
+        eatenFoods.add(food);
+        setChanged();
+        notifyObservers();
+    }
+
+
     public void addNewFood(String name, double cal){
         foods.add(new Food.Builder(name).calories(cal).build());
+        setChanged();
+        notifyObservers();
     }
 
 

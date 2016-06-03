@@ -49,5 +49,15 @@ public class Exercise implements CountVariable{
         return String.format("%s %f ", name, calories);
     }
 
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
 }
 

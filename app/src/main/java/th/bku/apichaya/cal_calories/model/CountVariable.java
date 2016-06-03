@@ -7,4 +7,6 @@ public interface CountVariable {
     public double getCalories();
     public void setCalories(double calories);
     public String toString();
+    public void setName(String name);
+    public String getName();
 }
