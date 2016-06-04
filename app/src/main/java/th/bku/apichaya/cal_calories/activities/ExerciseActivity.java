@@ -58,7 +58,7 @@ public class ExerciseActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "There is no a food you look for??", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "There is no an exercise you look for??", Snackbar.LENGTH_LONG)
                         .setAction("Add New Exercise", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {

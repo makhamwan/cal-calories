@@ -49,15 +49,15 @@ public class CaloriesCalculator extends Observable {
     }
 
     public void addExercise(Exercise exercise){
-        this.currentGain+=exercise.getCalories();
-        this.currentRemain+=exercise.getCalories();
+        this.currentGain+= (exercise.getTime()*exercise.getCalories());
+        this.currentRemain+= (exercise.getTime()*exercise.getCalories());
         notifyObservers();
         setChanged();
     }
 
     public void deleteExercise(Exercise exercise){
-        this.currentGain-=exercise.getCalories();
-        this.currentRemain-=exercise.getCalories();
+        this.currentGain-=(exercise.getTime()*exercise.getCalories());
+        this.currentRemain-=(exercise.getTime()*exercise.getCalories());
         setChanged();
         notifyObservers();
     }

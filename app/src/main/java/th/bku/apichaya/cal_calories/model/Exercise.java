@@ -7,16 +7,18 @@ public class Exercise implements CountVariable{
 
     private double calories;
     private String name;
+    private double time;
 
     public Exercise (Builder builder){
         this.calories = builder.calories;
         this.name = builder.name;
-
+        this.time = builder.time;
     }
 
     public static class Builder{
         private double calories;
         private String name;
+        private double time;
         public Builder(String name){
             this.name = name;
         }
@@ -28,7 +30,10 @@ public class Exercise implements CountVariable{
             this.name = name;
             return this;
         }
-
+        public Builder time(double time){
+            this.time = time;
+            return this;
+        }
         public Exercise build(){
             return new Exercise(this);
         }
@@ -59,5 +64,6 @@ public class Exercise implements CountVariable{
         return this.name;
     }
 
+    public double getTime() { return time; }
 }
 

@@ -34,9 +34,10 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
         TextView exercise_name = (TextView) v.findViewById(R.id.exercise_name);
         TextView tv_cal = (TextView) v.findViewById(R.id.tv_cal);
         TextView exercise_cal = (TextView) v.findViewById(R.id.exercise_cal);
+        TextView exercise_time = (TextView) v.findViewById(R.id.exercise_time);
         exercise_name.setText(exercises.get(position).getName());
-        exercise_cal.setText(exercises.get(position).getCalories() + " cal");
-
+        exercise_cal.setText(exercises.get(position).getCalories()*exercises.get(position).getTime() + " cal");
+        exercise_time.setText(exercises.get(position).getTime() + " hour");
         return v;
     }
 }

@@ -70,9 +70,10 @@ public class MainActivity extends AppCompatActivity implements Observer {
         gained_calories = (TextView) findViewById(R.id.num_gain);
         remaining_calories = (TextView) findViewById(R.id.num_remain);
 
-        this.used_calories.setText(""+CaloriesCalculator.getInstances().getCurrentUse());
-        this.gained_calories.setText(""+CaloriesCalculator.getInstances().getCurrentGain());
-        this.remaining_calories.setText(""+CaloriesCalculator.getInstances().getCurrentRemain());
+        total_calories = (TextView) findViewById(R.id.num_total);
+        this.used_calories.setText(String.format("%.1f",CaloriesCalculator.getInstances().getCurrentUse()));
+        this.gained_calories.setText(String.format("%.1f",CaloriesCalculator.getInstances().getCurrentGain()));
+        this.remaining_calories.setText(String.format("%.1f",CaloriesCalculator.getInstances().getCurrentRemain()));
 
         if(CaloriesCalculator.getInstances().getCurrentRemain()<0){
             this.remaining_calories.setTextColor(Color.RED);

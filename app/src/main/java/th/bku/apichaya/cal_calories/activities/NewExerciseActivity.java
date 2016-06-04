@@ -19,6 +19,7 @@ import th.bku.apichaya.cal_calories.util.Storage;
 public class NewExerciseActivity extends AppCompatActivity {
     private AutoCompleteTextView inputName;
     private AutoCompleteTextView inputCal;
+    private AutoCompleteTextView inputTime;
     private Button button;
 
     @Override
@@ -34,6 +35,7 @@ public class NewExerciseActivity extends AppCompatActivity {
     public void initComponents(){
         inputName = (AutoCompleteTextView)findViewById(R.id.input_exercise_name);
         inputCal = (AutoCompleteTextView)findViewById(R.id.input_exercise_cal);
+        inputTime = (AutoCompleteTextView)findViewById(R.id.input_exercise_time);
         button = (Button) findViewById(R.id.button_add_new_exercise);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -41,24 +43,32 @@ public class NewExerciseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String name;
                 double calories;
+                double time;
                 if(String.valueOf(inputCal.getText())!=null){
-
                     try{
                         calories = Double.parseDouble(String.valueOf(inputCal.getText()));
                     }catch(NumberFormatException e){
                         System.out.println("cal is null");
                         return ;
 
-
                     }
+
+                    time = 1;
+
+                    try{
+                        time = Double.parseDouble(String.valueOf(inputTime.getText()));
+                    }catch(NumberFormatException e){ return ;}
+
                     name = "Quick Add";
+
                     if(inputName!=null) name = String.valueOf(inputName.getText());
 
-                    Storage.getInstances().addNewExercise(name,calories);
-                    Storage.getInstances().addDoneExercise(
-                            Storage.getInstances().getExerciseList().get(
-                                    Storage.getInstances().getExerciseList().size()-1));
-                    CaloriesCalculator.getInstances().addExercise( new Exercise.Builder(name).calories(calories).build());
+                    Exercise exercise = new Exercise.Builder(name).calories(calories).time(time).build();
+
+                    Storage.getInstances().addNewExercise(exercise);
+                    Storage.getInstances().addDoneExercise(exercise);
+                    CaloriesCalculator.getInstances().addExercise(exercise);
+
                 }
 
                 Intent intent = new Intent(NewExerciseActivity.this, MainActivity.class);

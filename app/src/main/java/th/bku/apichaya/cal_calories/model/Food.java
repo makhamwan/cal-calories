@@ -8,6 +8,7 @@ public class Food implements  CountVariable{
     private double calories;
     private String name ;
 
+
     public Food(Builder builder) {
         this.calories = builder.calories;
         this.name = builder.name;

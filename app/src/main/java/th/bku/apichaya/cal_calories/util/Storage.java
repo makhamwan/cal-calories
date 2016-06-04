@@ -57,11 +57,11 @@ public class Storage {
 
     // Exercise
     public void exerciseProvider(){
-        Exercise hullahoop = new Exercise.Builder("Hullahoop 30 minutes").calories(137).build();
-        Exercise jogging = new Exercise.Builder("Jogging 30 minutes").calories(137).build();
-        Exercise joggingInPalce = new Exercise.Builder("Jogging In Place 30 minutes").calories(467).build();
-        Exercise swimming = new Exercise.Builder("swimming 1 hour").calories(326).build();
-        Exercise aerobic = new Exercise.Builder("Aerobic 30 minutes").calories(222).build();
+        Exercise hullahoop = new Exercise.Builder("Hullahoop").calories(137).time(1).build();
+        Exercise jogging = new Exercise.Builder("Jogging").calories(123).time(1).build();
+        Exercise joggingInPalce = new Exercise.Builder("Jogging In Place").time(1).calories(467).build();
+        Exercise swimming = new Exercise.Builder("swimming").calories(326).time(1).build();
+        Exercise aerobic = new Exercise.Builder("Aerobic").calories(222).time(1).build();
 
         exercises.add(hullahoop);
         exercises.add(jogging);
@@ -74,7 +74,9 @@ public class Storage {
     public List<Exercise> getExerciseList(){ return exercises; }
     public List<Exercise> getDoneExerciseList(){ return  doneExercises; }
     public void addDoneExercise(Exercise exercise){doneExercises.add(exercise);}
-    public void addNewExercise(String name, double cal){ exercises.add(new Exercise.Builder(name).calories(cal).build());}
+    public void addNewExercise(Exercise exercise){
+        exercises.add(new Exercise.Builder(exercise.getName()).calories(exercise.getCalories()).time(exercise.getTime()).build());
+    }
     public void deleteDoneExercise(int i){ this.doneExercises.remove(i);}
 
 }
