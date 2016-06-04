@@ -1,5 +1,8 @@
 package th.bku.apichaya.cal_calories.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -8,11 +11,14 @@ import th.bku.apichaya.cal_calories.util.Storage;
 /**
  * Created by makham on 28/5/2559.
  */
-public class CaloriesCalculator extends Observable{
+public class CaloriesCalculator extends Observable {
+
+
     private double total;
     private double currentUse;
     private double currentGain;
     private double currentRemain;
+
 
     public CaloriesCalculator(){
         currentUse = 0;
@@ -41,6 +47,7 @@ public class CaloriesCalculator extends Observable{
         this.currentRemain+=food.getCalories();
         setChanged();
         notifyObservers();
+        notifyAll();
     }
 
     public void addExercise(Exercise exercise){

@@ -10,11 +10,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
-
-import java.util.Observable;
-
 import th.bku.apichaya.cal_calories.R;
 import th.bku.apichaya.cal_calories.adapter.FoodAdapter;
+import th.bku.apichaya.cal_calories.model.CaloriesCalculator;
 import th.bku.apichaya.cal_calories.model.Food;
 import th.bku.apichaya.cal_calories.util.Storage;
 import static th.bku.apichaya.cal_calories.util.Storage.getInstances;
@@ -45,9 +43,10 @@ public class FoodActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 Storage.getInstances().addEatenFoods((Food) Storage.getInstances().getFoodList().get(((int)listView.getItemIdAtPosition(i))));
+//                getIntent().putExtra("foodIndex",(int)listView.getItemIdAtPosition(i));
+                Storage.getInstances().getCal().addFood((Food) Storage.getInstances().getFoodList().get(((int)listView.getItemIdAtPosition(i))));
                 Intent intent = new Intent(FoodActivity.this, MainActivity.class);
                 startActivity(intent);
-
             }
         });
     }

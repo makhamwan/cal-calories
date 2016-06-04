@@ -18,10 +18,12 @@ public class Storage extends Observable {
     private List exercises = new ArrayList<Exercise>();
     private List eatenFoods = new ArrayList<Food>();
     private List doneExercises = new ArrayList<Exercise>();
+    private CaloriesCalculator cal = new CaloriesCalculator();
 
     private Storage(){
         foodProvider();
         exerciseProvider();
+
     }
 
     public static Storage getInstances(){
@@ -70,6 +72,10 @@ public class Storage extends Observable {
     }
 
     public List<Exercise> getExerciseList(){ return exercises; }
+
+    public CaloriesCalculator getCal(){
+        return cal;
+    }
 
 
 

@@ -16,6 +16,8 @@ import th.bku.apichaya.cal_calories.R;
 import th.bku.apichaya.cal_calories.adapter.ExerciseAdapter;
 import th.bku.apichaya.cal_calories.adapter.FoodAdapter;
 import th.bku.apichaya.cal_calories.model.CaloriesCalculator;
+import th.bku.apichaya.cal_calories.util.Storage;
+
 import static th.bku.apichaya.cal_calories.util.Storage.getInstances;
 
 public class MainActivity extends AppCompatActivity implements Observer {
@@ -28,12 +30,12 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private TextView used_calories;
     private TextView gained_calories;
     private TextView remaining_calories;
-
     ListView foodListView;
     private FoodAdapter foodAdapter;
-
     ListView exerciseListView;
     private ExerciseAdapter exerciseAdapter;
+
+    private int foodIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,10 @@ public class MainActivity extends AppCompatActivity implements Observer {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        cal = new CaloriesCalculator();
+        cal = Storage.getInstances().getCal();
+        cal.addObserver(this);
+//        this.update(cal,null);
+
         //cal.addObserver(this);
         initBottombar();
         initComponents();
@@ -55,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements Observer {
         used_calories = (TextView) findViewById(R.id.num_use);
         gained_calories = (TextView) findViewById(R.id.num_total);
         remaining_calories = (TextView) findViewById(R.id.num_use);
+
+//        foodIndex = getIntent().getIntExtra("foodIndex",0);
+//        cal.addFood(Storage.getInstances().getFoodList().get(foodIndex));
+
 
         foodListView = (ListView) findViewById(R.id.food_list_view);
         foodAdapter = new FoodAdapter(this, R.layout.food_cell, getInstances().getEatenFoodList());
@@ -105,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     @Override
     public void update(Observable observable, Object data) {
-        this.total_calories.setText(""+cal.getTotal());
         this.used_calories.setText(""+cal.getCurrentUse());
         this.gained_calories.setText(""+cal.getCurrentUse());
         this.used_calories.setText(""+cal.getCurrentUse());
