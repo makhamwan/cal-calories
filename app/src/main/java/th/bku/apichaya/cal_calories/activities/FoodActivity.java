@@ -42,7 +42,6 @@ public class FoodActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 Storage.getInstances().addEatenFoods((Food) Storage.getInstances().getFoodList().get(((int)listView.getItemIdAtPosition(i))));
                 CaloriesCalculator.getInstances().addFood((Food) Storage.getInstances().getFoodList().get(((int)listView.getItemIdAtPosition(i))));
-                //finish();
                 Intent intent = new Intent(FoodActivity.this, MainActivity.class);
                 startActivityForResult(intent,RESULT_OK);
             }
@@ -55,8 +54,8 @@ public class FoodActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Do you want to add a food which is out of the list?", Snackbar.LENGTH_LONG)
-                        .setAction("Click here!", new View.OnClickListener() {
+                Snackbar.make(view, "There is no a food you look for?", Snackbar.LENGTH_LONG)
+                        .setAction("Add New Food", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Intent intent = new Intent(FoodActivity.this, NewFoodActivity.class);

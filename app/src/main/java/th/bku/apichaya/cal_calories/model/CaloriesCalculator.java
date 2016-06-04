@@ -14,7 +14,6 @@ import th.bku.apichaya.cal_calories.util.Storage;
 public class CaloriesCalculator extends Observable {
 
     private static CaloriesCalculator instance;
-
     private double total;
     private double currentUse;
     private double currentGain;
@@ -35,17 +34,11 @@ public class CaloriesCalculator extends Observable {
     public double getCurrentGain(){	return this.currentGain; }
     public double getCurrentRemain(){ return this.currentRemain; }
 
-    public void setCurrentUse(double c){ this.currentUse = c; }
-    public void setCurrentGain(double c){ this.currentGain = c; }
-    public void setCurrentRemain(double c){	this.currentRemain = c; }
-
     public void addFood(Food food){
         this.currentUse+=food.getCalories();
         this.currentRemain-=food.getCalories();
         setChanged();
         notifyObservers();
-        System.out.println(""+food.getName() + " has already add YoYo");
-        System.out.print("\n"+ this.currentUse+"\n");
     }
 
     public void deleteFood(Food food){
@@ -72,9 +65,7 @@ public class CaloriesCalculator extends Observable {
     public double getTotal() {
         return total;
     }
-
     public void setTotal(double total) {
         this.total = total;
     }
-
 }

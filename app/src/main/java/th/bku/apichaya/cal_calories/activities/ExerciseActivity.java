@@ -58,8 +58,8 @@ public class ExerciseActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Do you want to add a food which is out of the list?", Snackbar.LENGTH_LONG)
-                        .setAction("Click here!", new View.OnClickListener() {
+                Snackbar.make(view, "There is no a food you look for??", Snackbar.LENGTH_LONG)
+                        .setAction("Add New Exercise", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Intent intent = new Intent(ExerciseActivity.this, NewExerciseActivity.class);

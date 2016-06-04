@@ -47,17 +47,12 @@ public class Storage {
     }
 
     public List<Food> getFoodList(){ return foods; }
-
     public List<Food> getEatenFoodList(){ return eatenFoods; }
-
     public void addEatenFoods(Food food){
         eatenFoods.add(food);
     }
-
-
-    public void addNewFood(String name, double cal){
-        foods.add(new Food.Builder(name).calories(cal).build());
-    }
+    public void addNewFood(String name, double cal){ foods.add(new Food.Builder(name).calories(cal).build());}
+    public void deleteEatenFoodList(int i){ this.eatenFoods.remove(i); }
 
 
     // Exercise
@@ -77,25 +72,9 @@ public class Storage {
     }
 
     public List<Exercise> getExerciseList(){ return exercises; }
-
-    public void addDoneExercise(Exercise exercise){
-        doneExercises.add(exercise);
-    }
-
     public List<Exercise> getDoneExerciseList(){ return  doneExercises; }
-
-
-
-
-//
-//	public static void main(String[] args){
-//
-//		Storage storage = Storage.getInstances();
-//		for (int i = 0 ; i < storage.getFoodList().size() ; i++){
-//			System.out.println(storage.getFoodList().get(i));
-//		}
-//
-//	}
-
+    public void addDoneExercise(Exercise exercise){doneExercises.add(exercise);}
+    public void addNewExercise(String name, double cal){ exercises.add(new Exercise.Builder(name).calories(cal).build());}
+    public void deleteDoneExercise(int i){ this.doneExercises.remove(i);}
 
 }
