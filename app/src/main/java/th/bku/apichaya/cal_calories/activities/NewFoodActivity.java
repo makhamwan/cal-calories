@@ -1,5 +1,4 @@
 package th.bku.apichaya.cal_calories.activities;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -38,13 +37,20 @@ public class NewFoodActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name;
+                double calories;
                 if(String.valueOf(inputCal.getText())!=null){
-                    String name = "Quick Add";
-                    double calories;
-                    if(inputName!=null){
-                        name = String.valueOf(inputName.getText());
+
+                    try{
+                        calories = Double.parseDouble(String.valueOf(inputCal.getText()));
+                    }catch(NumberFormatException e){
+                        System.out.println("cal is null");
+                        return ;
                     }
-                    calories = Double.parseDouble(String.valueOf(inputCal.getText()));
+
+                    name = "Quick Add";
+                    if(inputName!=null) name = String.valueOf(inputName.getText());
+
                     Storage.getInstances().addNewFood(name,calories);
                     Storage.getInstances().addEatenFoods(
                             Storage.getInstances().getFoodList().get(
@@ -76,5 +82,4 @@ public class NewFoodActivity extends AppCompatActivity {
 
         });
     }
-
 }
