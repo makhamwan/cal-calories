@@ -6,4 +6,5 @@
     <string name="title_activity_quick_food">QuickFoodActivity</string>
     <string name="title_activity_exercise">ExerciseActivity</string>
     <string name="title_activity_new_food">NewFoodActivity</string>
+    <string name="title_activity_new_exercise">NewExerciseActivity</string>
 </resources>

@@ -1,5 +1,4 @@
 package th.bku.apichaya.cal_calories.activities;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,7 +17,6 @@ import th.bku.apichaya.cal_calories.util.Storage;
 import static th.bku.apichaya.cal_calories.util.Storage.getInstances;
 
 public class FoodActivity extends AppCompatActivity {
-
     private AutoCompleteTextView search_field;
     private FoodAdapter foodAdapter;
     private ListView listView;
@@ -43,10 +41,10 @@ public class FoodActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 Storage.getInstances().addEatenFoods((Food) Storage.getInstances().getFoodList().get(((int)listView.getItemIdAtPosition(i))));
-//                getIntent().putExtra("foodIndex",(int)listView.getItemIdAtPosition(i));
-                Storage.getInstances().getCal().addFood((Food) Storage.getInstances().getFoodList().get(((int)listView.getItemIdAtPosition(i))));
+                CaloriesCalculator.getInstances().addFood((Food) Storage.getInstances().getFoodList().get(((int)listView.getItemIdAtPosition(i))));
+                //finish();
                 Intent intent = new Intent(FoodActivity.this, MainActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,RESULT_OK);
             }
         });
     }
@@ -69,6 +67,4 @@ public class FoodActivity extends AppCompatActivity {
 
         });
     }
-
-
 }

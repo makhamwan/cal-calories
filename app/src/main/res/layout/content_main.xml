@@ -194,7 +194,7 @@
     <LinearLayout
         android:id="@+id/listfood_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/meal_layout"
         >
 
@@ -202,9 +202,26 @@
             android:id="@+id/food_list_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+        </ListView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/listexercise_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listfood_view"
+        >
+
+        <ListView
+            android:id="@+id/exercise_list_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
         </ListView>
 
     </LinearLayout>
+
 
 </RelativeLayout>

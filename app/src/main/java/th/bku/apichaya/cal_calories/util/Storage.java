@@ -12,13 +12,12 @@ import th.bku.apichaya.cal_calories.model.Food;
 /**
  * Created by makham on 17/4/2559.
  */
-public class Storage extends Observable {
+public class Storage {
     private static Storage instance;
     private List foods = new ArrayList<Food>();
     private List exercises = new ArrayList<Exercise>();
     private List eatenFoods = new ArrayList<Food>();
     private List doneExercises = new ArrayList<Exercise>();
-    private CaloriesCalculator cal = new CaloriesCalculator();
 
     private Storage(){
         foodProvider();
@@ -53,29 +52,38 @@ public class Storage extends Observable {
 
     public void addEatenFoods(Food food){
         eatenFoods.add(food);
-        setChanged();
-        notifyObservers();
     }
 
 
     public void addNewFood(String name, double cal){
         foods.add(new Food.Builder(name).calories(cal).build());
-        setChanged();
-        notifyObservers();
     }
 
 
     // Exercise
     public void exerciseProvider(){
+        Exercise hullahoop = new Exercise.Builder("Hullahoop 30 minutes").calories(137).build();
+        Exercise jogging = new Exercise.Builder("Jogging 30 minutes").calories(137).build();
+        Exercise joggingInPalce = new Exercise.Builder("Jogging In Place 30 minutes").calories(467).build();
+        Exercise swimming = new Exercise.Builder("swimming 1 hour").calories(326).build();
+        Exercise aerobic = new Exercise.Builder("Aerobic 30 minutes").calories(222).build();
 
-
+        exercises.add(hullahoop);
+        exercises.add(jogging);
+        exercises.add(jogging);
+        exercises.add(joggingInPalce);
+        exercises.add(swimming);
+        exercises.add(aerobic);
     }
 
     public List<Exercise> getExerciseList(){ return exercises; }
 
-    public CaloriesCalculator getCal(){
-        return cal;
+    public void addDoneExercise(Exercise exercise){
+        doneExercises.add(exercise);
     }
+
+    public List<Exercise> getDoneExerciseList(){ return  doneExercises; }
+
 
 
 
