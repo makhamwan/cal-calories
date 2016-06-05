@@ -6,12 +6,13 @@ import android.os.Parcelable;
 import java.util.Observable;
 import java.util.Observer;
 
+import th.bku.apichaya.cal_calories.activities.BMRActivity;
 import th.bku.apichaya.cal_calories.util.Storage;
 
 /**
  * Created by makham on 28/5/2559.
  */
-public class CaloriesCalculator extends Observable {
+public class CaloriesCalculator extends Observable implements Observer{
 
     private static CaloriesCalculator instance;
     private double total;
@@ -20,9 +21,10 @@ public class CaloriesCalculator extends Observable {
     private double currentRemain;
 
     private CaloriesCalculator(){
+        total = 1200;
         currentUse = 0;
         currentGain = 0;
-        currentRemain = 1200;
+        currentRemain = total;
     }
 
     public static CaloriesCalculator getInstances(){
@@ -67,5 +69,28 @@ public class CaloriesCalculator extends Observable {
     }
     public void setTotal(double total) {
         this.total = total;
+        setChanged();
+        notifyObservers();
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+        int newTotal = (int) data;
+
+        double remain = this.getCurrentRemain();
+        this.setCurrentRemain((remain+newTotal)-total);
+        this.setTotal(newTotal);
+
+        System.out.println(" new total " + newTotal);
+        System.out.println(" new remain " + this.getCurrentRemain());
+
+        notifyObservers();
+        setChanged();
+    }
+
+    public void setCurrentRemain(double currentRemain) {
+        this.currentRemain = currentRemain;
+        setChanged();
+        notifyObservers();
     }
 }

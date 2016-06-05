@@ -33,7 +33,15 @@
         <activity
             android:name=".activities.NewExerciseActivity"
             android:label="@string/title_activity_new_exercise"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.NewExerciseActivity$BMRActivity"
+            android:label="@string/title_activity_bmr"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.BMRActivity"
+            android:label="@string/title_activity_bmr"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

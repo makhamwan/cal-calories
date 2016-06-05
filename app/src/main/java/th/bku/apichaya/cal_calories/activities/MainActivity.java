@@ -3,7 +3,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,16 +11,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 import java.util.Observable;
 import java.util.Observer;
+
 import th.bku.apichaya.cal_calories.R;
 import th.bku.apichaya.cal_calories.adapter.ExerciseAdapter;
 import th.bku.apichaya.cal_calories.adapter.FoodAdapter;
+import th.bku.apichaya.cal_calories.model.BMRCalculator;
 import th.bku.apichaya.cal_calories.model.CaloriesCalculator;
 import th.bku.apichaya.cal_calories.model.Exercise;
 import th.bku.apichaya.cal_calories.model.Food;
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         setSupportActionBar(toolbar);
 
         CaloriesCalculator.getInstances().addObserver(this);
+
         start = true;
         initBottombar();
         initComponents();
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         gained_calories = (TextView) findViewById(R.id.num_gain);
         remaining_calories = (TextView) findViewById(R.id.num_remain);
 
-        total_calories = (TextView) findViewById(R.id.num_total);
+        this.total_calories.setText(String.format("%.1f",CaloriesCalculator.getInstances().getTotal()));
         this.used_calories.setText(String.format("%.1f",CaloriesCalculator.getInstances().getCurrentUse()));
         this.gained_calories.setText(String.format("%.1f",CaloriesCalculator.getInstances().getCurrentGain()));
         this.remaining_calories.setText(String.format("%.1f",CaloriesCalculator.getInstances().getCurrentRemain()));
@@ -88,8 +89,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 i = position;
-                new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("Delete Food")
+                    new AlertDialog.Builder(MainActivity.this)
                         .setMessage("Do you want to delete this food from list?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 i = position;
                 new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("Delete Exercise")
                         .setMessage("Do you want to delete this exercise from list?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -148,6 +147,10 @@ public class MainActivity extends AppCompatActivity implements Observer {
                         startActivity(intent);
                     }
                 }
+                else if(menuItemId == R.id.BMR){
+                    Intent intent = new Intent(MainActivity.this, BMRActivity.class);
+                    startActivity(intent);
+                }
             }
             @Override
             public void onMenuTabReSelected(@IdRes int menuItemId) {
@@ -157,6 +160,10 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 }
                 else if(menuItemId == R.id.exerciseFromList){
                     Intent intent = new Intent(MainActivity.this, ExerciseActivity.class);
+                    startActivity(intent);
+                }
+                else if(menuItemId == R.id.BMR){
+                    Intent intent = new Intent(MainActivity.this, BMRActivity.class);
                     startActivity(intent);
                 }
             }
@@ -185,6 +192,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     @Override
     public void update(Observable observable, Object data) {
+        this.total_calories.setText(String.format("%.1f",CaloriesCalculator.getInstances().getTotal()));
         this.used_calories.setText(""+CaloriesCalculator.getInstances().getCurrentUse());
         this.gained_calories.setText(""+CaloriesCalculator.getInstances().getCurrentGain());
         this.remaining_calories.setText(""+CaloriesCalculator.getInstances().getCurrentRemain());

@@ -4,17 +4,14 @@
         android:id="@+id/foodFromList"
         android:icon="@android:drawable/ic_menu_add"
         android:title="Add Food"></item>
-    <!--<item-->
-        <!--android:id="@+id/newFood"-->
-        <!--android:icon="@android:drawable/ic_menu_add"-->
-        <!--android:title="Add New Food"></item>-->
+    <item
+        android:id="@+id/BMR"
+        android:icon="@android:drawable/ic_menu_more"
+        android:title="Calculate BMR"></item>
     <item
         android:id="@+id/exerciseFromList"
         android:icon="@android:drawable/ic_menu_add"
         android:title="Add Exercise"></item>
-    <!--<item-->
-        <!--android:id="@+id/newExercise"-->
-        <!--android:icon="@android:drawable/ic_menu_add"-->
-        <!--android:title="Add New Exercise"></item>-->
+
 
 </menu>
