@@ -42,11 +42,6 @@ public class Food implements  CountVariable{
         return this.calories;
     }
 
-    @Override
-    public void setCalories(double calories) {
-        this.calories = calories;
-    }
-
     public String toString (){
         return String.format("%s %f ", name, calories);
     }
@@ -57,9 +52,5 @@ public class Food implements  CountVariable{
         return this.name;
     }
 
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
 
 }

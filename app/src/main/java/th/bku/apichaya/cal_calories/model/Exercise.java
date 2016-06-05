@@ -45,18 +45,9 @@ public class Exercise implements CountVariable{
         return this.calories;
     }
 
-    @Override
-    public void setCalories(double calories) {
-        this.calories = calories;
-    }
 
     public String toString (){
         return String.format("%s %f ", name, calories);
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
