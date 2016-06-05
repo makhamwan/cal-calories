@@ -36,6 +36,12 @@ public class BMRActivity extends AppCompatActivity {
         inputH = (TextView) findViewById(R.id.input_height);
         inputA = (TextView) findViewById(R.id.input_age);
         inputG = (TextView) findViewById(R.id.input_gender);
+
+        inputW.setText("" + BMRCalculator.getInstance().getWeight());
+        inputH.setText("" + BMRCalculator.getInstance().getHeight());
+        inputA.setText("" + BMRCalculator.getInstance().getAge());
+        inputG.setText("" + BMRCalculator.getInstance().getGender());
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,23 +57,29 @@ public class BMRActivity extends AppCompatActivity {
                     h = Double.parseDouble(String.valueOf(inputH.getText()));
                     a = Double.parseDouble(String.valueOf(inputA.getText()));
 
+                    if ( String.valueOf(inputG.getText())!=null){
+                        g = String.valueOf(inputG.getText()).charAt(0);
+                    }
+
+                    if (g=='m' || g=='M'){
+                        CaloriesCalculator.getInstances().setCurrentRemain(( (CaloriesCalculator.getInstances().getCurrentRemain() - CaloriesCalculator.getInstances().getTotal()) + Math.round(66 + ( 13.7 * w ) + ( 5 * h ) - ( 6.8 * a ))));
+                        CaloriesCalculator.getInstances().setTotal( Math.round(66 + ( 13.7 * w ) + ( 5 * h ) - ( 6.8 * a )));
+                    }
+                    else if (g=='f' || g=='F'){
+                        CaloriesCalculator.getInstances().setCurrentRemain(( (CaloriesCalculator.getInstances().getCurrentRemain() - CaloriesCalculator.getInstances().getTotal()) + Math.round(655 + ( 9.6 * w ) + ( 1.8 * h ) - ( 4.7 * a ))));
+                        CaloriesCalculator.getInstances().setTotal( Math.round(655 + ( 9.6 * w ) + ( 1.8 * h ) - ( 4.7 * a )));
+                    }
+
+                    BMRCalculator.getInstance().setWeight(w);
+                    BMRCalculator.getInstance().setHeight(h);
+                    BMRCalculator.getInstance().setAge(a);
+                    BMRCalculator.getInstance().setGender(g);
 
                 }catch(NumberFormatException e){
                     return ;
                 }
 
-                if ( String.valueOf(inputG.getText())!=null){
-                    g = String.valueOf(inputG.getText()).charAt(0);
-                }
 
-                if (g=='m' || g=='M'){
-                    CaloriesCalculator.getInstances().setCurrentRemain(( (CaloriesCalculator.getInstances().getCurrentRemain() - CaloriesCalculator.getInstances().getTotal()) + Math.round(66 + ( 13.7 * w ) + ( 5 * h ) - ( 6.8 * a ))));
-                    CaloriesCalculator.getInstances().setTotal( Math.round(66 + ( 13.7 * w ) + ( 5 * h ) - ( 6.8 * a )));
-                }
-                else if (g=='f' || g=='F'){
-                    CaloriesCalculator.getInstances().setCurrentRemain(( (CaloriesCalculator.getInstances().getCurrentRemain() - CaloriesCalculator.getInstances().getTotal()) + Math.round(655 + ( 9.6 * w ) + ( 1.8 * h ) - ( 4.7 * a ))));
-                    CaloriesCalculator.getInstances().setTotal( Math.round(655 + ( 9.6 * w ) + ( 1.8 * h ) - ( 4.7 * a )));
-                }
 
                 finish();
 

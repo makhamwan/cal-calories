@@ -33,8 +33,25 @@ public class BMRCalculator extends Observable {
         notifyObservers();
     }
 
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public double getAge() {
+        return age;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
     public void setHeight(double height) {
         this.height = height;
+
         System.out.println("Set H");
         setChanged();
         notifyObservers();
